@@ -1,0 +1,1 @@
+# MCP, OpenAI Function Calling, JSON Schema, OpenAPI
