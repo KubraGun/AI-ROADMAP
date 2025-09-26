@@ -1,45 +1,56 @@
-1. Tabular / Zaman Serisi Veri
+ï»¿1. Tabular / Zaman Serisi Veri
 
-Yaptığımız: kolon bazlı eksiklik oranı, gap/blok analizi, ardışıklık, süre/uzunluk dağılımı.
+YaptÄ±ÄŸÄ±mÄ±z: kolon bazlÄ± eksiklik oranÄ±, gap/blok analizi, ardÄ±ÅŸÄ±klÄ±k, sÃ¼re/uzunluk daÄŸÄ±lÄ±mÄ±.
 
-Ek yaklaşımlar: eksiklik mekanizması testi (MCAR testleri, Little’s MCAR test).
+Ek yaklaÅŸÄ±mlar: eksiklik mekanizmasÄ± testi (MCAR testleri, Littleâ€™s MCAR test).
 
-2. Görüntü (Image) Verisi
+2. GÃ¶rÃ¼ntÃ¼ (Image) Verisi
 
-Eksik piksel analizi (bozuk sensör, maskelenmiş alan, noise).
+Eksik piksel analizi (bozuk sensÃ¶r, maskelenmiÅŸ alan, noise).
 
-Genelde “inpainting” yöntemleri (CNN, diffusion, GAN) ile tamamlanıyor.
+Genelde â€œinpaintingâ€ yÃ¶ntemleri (CNN, diffusion, GAN) ile tamamlanÄ±yor.
 
-Analiz: eksikliğin konumu (ör. kenarlarda mı merkezde mi?), dağılımı (tekil mi blok halinde mi?).
+Analiz: eksikliÄŸin konumu (Ã¶r. kenarlarda mÄ± merkezde mi?), daÄŸÄ±lÄ±mÄ± (tekil mi blok halinde mi?).
 
 3. Metin (Text / NLP) Verisi
 
-Eksiklik: bozuk OCR çıktısı, silinmiş kelime, eksik etiket.
+Eksiklik: bozuk OCR Ã§Ä±ktÄ±sÄ±, silinmiÅŸ kelime, eksik etiket.
 
-Analiz: “token missing rate” (kaç kelime boş kalmış), “span gap” (kaç ardışık kelime kayıp).
+Analiz: â€œtoken missing rateâ€ (kaÃ§ kelime boÅŸ kalmÄ±ÅŸ), â€œspan gapâ€ (kaÃ§ ardÄ±ÅŸÄ±k kelime kayÄ±p).
 
 Genelde mask-based dil modelleri (BERT, LLaMA) ile dolduruluyor.
 
-4. Grafik / Ağ Verisi (Graph Data)
+4. Grafik / AÄŸ Verisi (Graph Data)
 
 Eksiklik: eksik node veya eksik edge.
 
-Analiz: “node missing ratio”, “edge density drop”, bağlanırlık testi (connectedness).
+Analiz: â€œnode missing ratioâ€, â€œedge density dropâ€, baÄŸlanÄ±rlÄ±k testi (connectedness).
 
 Doldurma: graph completion, link prediction.
 
 5. Multimodal Veriler
 
-Örneğin finansal haber + fiyat serisi senaryosunda, haber metinleri tam ama fiyat verisi eksik olabilir.
+Ã–rneÄŸin finansal haber + fiyat serisi senaryosunda, haber metinleri tam ama fiyat verisi eksik olabilir.
 
-Eksikliği ayrı ayrı analiz etmek ve sonra fused imputasyon yapmak gerek (ör. haber embedding’leri yardımıyla fiyat eksikliklerini tahmin etmek).
+EksikliÄŸi ayrÄ± ayrÄ± analiz etmek ve sonra fused imputasyon yapmak gerek (Ã¶r. haber embeddingâ€™leri yardÄ±mÄ±yla fiyat eksikliklerini tahmin etmek).
 
-Özet:
+Ã–zet:
 
 Eksik veri analizi her veri tipinde var.
 
 Tabular/zaman serisinde klasik metrikler (oran, gap, blok).
 
-Görüntüde “mask distribution”, metinde “token drop”, grafikte “node/edge missing”.
+GÃ¶rÃ¼ntÃ¼de â€œmask distributionâ€, metinde â€œtoken dropâ€, grafikte â€œnode/edge missingâ€.
 
-Amaç hep aynı: eksikliğin oranını, dağılımını ve örüntüsünü anlamak.
+AmaÃ§ hep aynÄ±: eksikliÄŸin oranÄ±nÄ±, daÄŸÄ±lÄ±mÄ±nÄ± ve Ã¶rÃ¼ntÃ¼sÃ¼nÃ¼ anlamak.
+
+
+# Eksik Veri Analizi â€“ Veri TÃ¼rlerine GÃ¶re KarÅŸÄ±laÅŸtÄ±rma
+
+| Veri TÃ¼rÃ¼              | Eksiklik TÃ¼rÃ¼                                      | Analiz YÃ¶ntemleri                                                                 | Tipik Doldurma YÃ¶ntemleri                                                                 |
+|------------------------|----------------------------------------------------|-----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| **Tabular / Zaman Serisi** | Tekil NaN, ardÄ±ÅŸÄ±k blok (gap), sistematik eksiklik (Ã¶r. tatiller) | Eksik oranÄ± (%), gap count, max gap, Littleâ€™s MCAR Test, pattern analizi          | Forward/Backward fill, Interpolasyon (lineer/spline), Model tabanlÄ± (Kalman, ARIMA, ML)   |
+| **GÃ¶rÃ¼ntÃ¼ (Image)**    | Eksik piksel, sensÃ¶r hatasÄ±, maskelenmiÅŸ bÃ¶lgeler  | Eksik piksel oranÄ±, mekÃ¢nsal daÄŸÄ±lÄ±m (blok mu rastgele mi?), mask daÄŸÄ±lÄ±mÄ± analizi | Inpainting (CNN, GAN, Diffusion), spline tabanlÄ± gÃ¶rÃ¼ntÃ¼ doldurma                         |
+| **Metin (Text/NLP)**   | Eksik kelime/token, bozuk OCR, eksik cÃ¼mle/paragraf | Missing token ratio, span length distribution                                     | Masked Language Model (BERT), Seq2Seq tamamlama, Embedding tabanlÄ± doldurma               |
+| **Grafik / AÄŸ (Graph)**| Eksik dÃ¼ÄŸÃ¼m (node), eksik kenar (edge), incomplete subgraph | Node missing rate, edge density, connectedness analizi                             | Link prediction, Graph completion (GCN, GAT)                                              |
+| **Multimodal** (Ã¶rn. Haber + Fiyat serisi) | Bir mod eksik (Ã¶r. fiyat var haber yok, haber var fiyat yok) | Mod bazlÄ± eksik oranÄ±, senkronizasyon analizi                                      | Cross-modal imputasyon (metin â†’ sayÄ±, gÃ¶rÃ¼ntÃ¼ â†’ tablo), ortak embedding tabanlÄ± tamamlama |
